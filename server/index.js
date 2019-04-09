@@ -34,8 +34,8 @@ app.get('/api/fetchItems', (req, res) => {
 });
 
 app.post('/api/saveItem', (req, res) => {
-  const { string } = req.body;
-  controller.saveItem(string, err => {
+  const { item } = req.body;
+  controller.saveItem(item, err => {
     if (err) {
       res.status(400).send(err);
     } else {

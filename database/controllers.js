@@ -1,11 +1,11 @@
-const StringModel = require('./model');
+const ItemModel = require('./model');
 
-const saveItem = (string, callback) => {
-  StringModel.create({ item: string }, callback);
+const saveItem = (item, callback) => {
+  ItemModel.create({ item }, callback);
 };
 
 const fetchItems = callback => {
-  StringModel.find({}, callback);
+  ItemModel.find({}, callback);
 };
 
 module.exports = {

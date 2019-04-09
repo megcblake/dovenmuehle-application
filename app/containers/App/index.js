@@ -13,12 +13,14 @@ import { Switch, Route } from 'react-router-dom';
 import HomePage from 'containers/HomePage/Loadable';
 import DisplayItems from 'containers/DisplayItems/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
+import Nav from '../../components/Nav';
 
 import GlobalStyle from '../../global-styles';
 
 export default function App() {
   return (
     <div>
+      <Nav />
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/display" component={DisplayItems} />

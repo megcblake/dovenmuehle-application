@@ -1,9 +1,15 @@
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
-const saveItemSelector = state => state.get('saveItem', initialState);
+const saveItemSelector = state => state.get('save', initialState);
 
 const itemSelector = () =>
-  createSelector(saveItemSelector, saveItemState => saveItemState.get('item'));
+  createSelector(saveItemSelector, saveState => saveState.get('item'));
 
-export { saveItemSelector, itemSelector };
+const successSelector = () =>
+  createSelector(saveItemSelector, saveState => saveState.get('success'));
+
+const errorSelector = () =>
+  createSelector(saveItemSelector, saveState => saveState.get('error'));
+
+export { saveItemSelector, itemSelector, successSelector, errorSelector };
