@@ -4,20 +4,20 @@ import { connect } from 'react-redux';
 import injectReducer from 'utils/injectReducer';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import { changeString } from './actions';
-import { makeSelectString } from './selectors';
+import { changeItem } from './actions';
+import { itemSelector } from './selectors';
 import reducer from './reducer';
 
-export class SaveString extends React.PureComponent {
+export class SaveItem extends React.PureComponent {
   render() {
     return (
       <form>
         <label>
-          string:
+          item:
           <input
             type="text"
-            value={this.props.string}
-            onChange={this.props.onChangeString}
+            value={this.props.item}
+            onChange={this.props.onChangeItem}
           />
         </label>
         <input type="submit" />
@@ -26,19 +26,19 @@ export class SaveString extends React.PureComponent {
   }
 }
 
-SaveString.propTypes = {
-  string: PropTypes.string,
-  onChangeString: PropTypes.func,
+SaveItem.propTypes = {
+  item: PropTypes.string,
+  onChangeItem: PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onChangeString: evt => dispatch(changeString(evt.target.value)),
+    onChangeItem: evt => dispatch(changeItem(evt.target.value)),
   };
 }
 
 const mapStateToProps = createStructuredSelector({
-  string: makeSelectString(),
+  item: itemSelector(),
 });
 
 const withConnect = connect(
@@ -46,9 +46,9 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-const withReducer = injectReducer({ key: 'save', reducer });
+const withReducer = injectReducer({ key: 'saveItem', reducer });
 
 export default compose(
   withConnect,
   withReducer,
-)(SaveString);
+)(SaveItem);

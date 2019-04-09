@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/dovenmuehle');
+mongoose.connect(
+  'mongodb://localhost/dovenmuehle',
+  { useNewUrlParser: true },
+);
 
 const db = mongoose.connection;
 

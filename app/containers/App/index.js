@@ -11,7 +11,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import HomePage from 'containers/HomePage/Loadable';
-import DisplayStrings from 'containers/DisplayStrings/Loadable';
+import DisplayItems from 'containers/DisplayItems/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 import GlobalStyle from '../../global-styles';
@@ -21,7 +21,7 @@ export default function App() {
     <div>
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route exact path="/display" component={DisplayStrings} />
+        <Route exact path="/display" component={DisplayItems} />
         <Route component={NotFoundPage} />
       </Switch>
       <GlobalStyle />

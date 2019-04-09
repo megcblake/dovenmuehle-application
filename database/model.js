@@ -1,7 +1,9 @@
 const mongoose = require('./index');
 
-const StringSchema = new mongoose.Schema({
-  string: String,
+const { Schema } = mongoose;
+
+const StringSchema = new Schema({
+  item: String,
 });
 
 const StringModel = mongoose.model('StringModel', StringSchema);

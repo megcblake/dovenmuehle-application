@@ -6,6 +6,7 @@ const logger = require('./logger');
 const argv = require('./argv');
 const port = require('./port');
 const setup = require('./middlewares/frontendMiddleware');
+const bodyParser = require('body-parser');
 const isDev = process.env.NODE_ENV !== 'production';
 const ngrok =
   (isDev && process.env.ENABLE_TUNNEL) || argv.tunnel
@@ -13,9 +14,35 @@ const ngrok =
     : false;
 const { resolve } = require('path');
 const app = express();
+const controller = require('../database/controllers');
+
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(bodyParser.json());
 
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
 // app.use('/api', myApi);
+
+app.get('/api/fetchItems', (req, res) => {
+  controller.fetchItems((err, response) => {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      res.status(200).send(JSON.stringify(response));
+    }
+  });
+});
+
+app.post('/api/saveItem', (req, res) => {
+  const { string } = req.body;
+  controller.saveItem(string, err => {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      res.status(200).send();
+    }
+  });
+});
 
 // In production we need to pass these values in instead of relying on webpack
 setup(app, {

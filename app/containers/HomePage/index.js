@@ -12,7 +12,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
-import SaveString from '../SaveString';
+import SaveItem from '../SaveItem';
 
 /* eslint-disable react/prefer-stateless-function */
 export default class HomePage extends React.PureComponent {
@@ -22,7 +22,7 @@ export default class HomePage extends React.PureComponent {
         <h1>
           <FormattedMessage {...messages.header} />
         </h1>
-        <SaveString />
+        <SaveItem />
       </div>
     );
   }
