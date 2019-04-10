@@ -13,7 +13,7 @@ npm start
 
 ### Installing Dependencies
 
-From within the root directory:
+> From within the root directory:
 
 ```sh
 npm install
