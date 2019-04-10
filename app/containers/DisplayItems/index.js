@@ -19,22 +19,25 @@ class DisplayItems extends React.Component {
     this.props.loadItems();
   }
 
-  renderItems() {
-    const { items, success, error } = this.props;
+  listContents() {
+    const { success, error, items } = this.props;
+    let content = <div />;
     if (!success && !error) {
-      return <div>Loading items...</div>;
-    }
-    if (error) {
-      return <div>Error loading items.</div>;
-    }
-    if (success) {
-      return items.map((item, i) => (
-        <div key={item._id}>
-          {i + 1}. {item.item}
+      content = <div>Loading items...</div>;
+    } else if (error) {
+      content = <div>Error loading items</div>;
+    } else if (success) {
+      content = (
+        <div>
+          {items.map((item, i) => (
+            <div key={item._id}>
+              {i + 1}. {item.item}
+            </div>
+          ))}
         </div>
-      ));
+      );
     }
-    return <div />;
+    return content;
   }
 
   render() {
@@ -43,7 +46,7 @@ class DisplayItems extends React.Component {
         <h2>
           <FormattedMessage {...messages.header} />
         </h2>
-        {this.renderItems()}
+        {this.listContents()}
       </Center>
     );
   }
