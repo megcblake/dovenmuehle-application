@@ -1,8 +1,20 @@
-import { put } from 'redux-saga/effects';
+import { put, takeLatest } from 'redux-saga/effects';
 import { saveItemError } from '../actions';
 import { postItem } from '../postItem';
+import { SAVE_ITEM } from '../constants';
+import displayItemsSaga from '../saga';
 
 describe('displayItemsSaga', () => {
+  it('should call on SAVE_ITEM', () => {
+    const iterator = displayItemsSaga();
+    const expected = takeLatest(SAVE_ITEM, postItem);
+    const actual = iterator.next().value;
+
+    expect(actual).toEqual(expected);
+  });
+});
+
+describe('postItem', () => {
   let saveItemGenerator;
 
   beforeEach(() => {

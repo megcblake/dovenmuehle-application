@@ -28,7 +28,11 @@ class DisplayItems extends React.Component {
       return <div>Error loading items.</div>;
     }
     if (success) {
-      return items.map(item => <div key={item._id}>{item.item}</div>);
+      return items.map((item, i) => (
+        <div key={item._id}>
+          {i + 1}. {item.item}
+        </div>
+      ));
     }
     return <div />;
   }
