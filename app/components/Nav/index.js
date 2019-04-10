@@ -1,14 +1,12 @@
 import React from 'react';
+import HeaderLink from './HeaderLink';
+import Wrapper from './Wrapper';
 
 const Nav = () => (
-  <div>
-    <div>
-      <a href="/">Home</a>
-    </div>
-    <div>
-      <a href="/display">Display Items</a>
-    </div>
-  </div>
+  <Wrapper>
+    <HeaderLink to="/">Home</HeaderLink>
+    <HeaderLink to="/display">Items</HeaderLink>
+  </Wrapper>
 );
 
 export default Nav;

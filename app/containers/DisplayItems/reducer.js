@@ -12,7 +12,7 @@ function displayItemsReducer(state = initialState, action) {
     case LOAD_ITEMS_SUCCESS:
       return state.set('success', true).set('items', action.items);
     case LOAD_ITEMS_ERROR:
-      return state.set('error', true);
+      return state.set('error', action.error);
     default:
       return state;
   }

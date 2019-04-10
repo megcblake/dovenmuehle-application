@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -5,22 +6,41 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
+import { FormattedMessage } from 'react-intl';
 import { itemsSelector, successSelector, errorSelector } from './selectors';
 import { loadItems } from './actions';
 import reducer from './reducer';
 import saga from './saga';
+import messages from './messages';
+import Center from '../../components/Interface/Center';
 
 class DisplayItems extends React.Component {
   componentDidMount() {
     this.props.loadItems();
   }
 
+  renderItems() {
+    const { items, success, error } = this.props;
+    if (!success && !error) {
+      return <div>Loading items...</div>;
+    }
+    if (error) {
+      return <div>Error loading items.</div>;
+    }
+    if (success) {
+      return items.map(item => <div key={item._id}>{item.item}</div>);
+    }
+    return <div />;
+  }
+
   render() {
-    const { success, items } = this.props;
     return (
-      <div>
-        {success && items.map(item => <div key={item._id}>{item.item}</div>)}
-      </div>
+      <Center>
+        <h2>
+          <FormattedMessage {...messages.header} />
+        </h2>
+        {this.renderItems()}
+      </Center>
     );
   }
 }
@@ -28,6 +48,7 @@ class DisplayItems extends React.Component {
 DisplayItems.propTypes = {
   loadItems: PropTypes.func,
   success: PropTypes.bool,
+  error: PropTypes.any,
   items: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 };
 

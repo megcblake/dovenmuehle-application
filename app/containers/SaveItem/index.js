@@ -5,25 +5,35 @@ import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import { FormattedMessage } from 'react-intl';
 import { changeItem, saveItem } from './actions';
 import { itemSelector, successSelector, errorSelector } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+import messages from './messages';
+import Submit from '../../components/Form/Submit';
+import Label from '../../components/Form/Label';
+import Input from '../../components/Form/Input';
 
 export class SaveItem extends React.PureComponent {
   render() {
     return (
-      <form onSubmit={this.props.onSubmitForm}>
-        <label>
-          item:
-          <input
-            type="text"
-            value={this.props.item}
-            onChange={this.props.onChangeItem}
-          />
-        </label>
-        <input type="submit" />
-      </form>
+      <div>
+        <h2>
+          <FormattedMessage {...messages.header} />
+        </h2>
+        <form onSubmit={this.props.onSubmitForm}>
+          <Label>
+            Input Item:
+            <Input
+              type="text"
+              value={this.props.item}
+              onChange={this.props.onChangeItem}
+            />
+          </Label>
+          <Submit type="submit" />
+        </form>
+      </div>
     );
   }
 }
