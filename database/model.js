@@ -2,10 +2,10 @@ const mongoose = require('./index');
 
 const { Schema } = mongoose;
 
-const StringSchema = new Schema({
+const ItemSchema = new Schema({
   item: String,
 });
 
-const StringModel = mongoose.model('StringModel', StringSchema);
+const ItemModel = mongoose.model('ItemModel', ItemSchema);
 
-module.exports = StringModel;
+module.exports = ItemModel;
